@@ -1,0 +1,62 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+struct Node{
+    int data;
+    Node* left;
+    Node* right;
+}
+
+Node* newNode(int val){
+    Node* temp = new Node;
+    temp->data = val;
+    temp->left = NULL;
+    temp->right = NULL;
+
+    return temp;    
+}
+
+vector<int> topView(Node *root){
+    vector<int> ans;
+    map<int,int> topNode;
+    queue<pair<Node*,int>> q;
+
+    if(root == NULL){
+        return ans;
+    } 
+
+    q.push(make_pair(root,0));
+
+    while(!q.empty()){
+        pair<Node*, int> temp = q.front();
+
+        q.pop();
+        Node* frontNode = temp.first;
+        int horizDist = temp.second;
+
+        if(topNode.find(horizDist) == topNode.end()){
+            topNode[horzDist] = frontNode->data;
+        }
+
+        if(frontNode->left){
+            q.push(make_pair(frontNode->left,horizDist-1));
+        }
+
+        if(frontNode->right){
+            q.push(make_pair(frontNode->right,horizDist+1));
+        }
+    }
+
+    for(auto i:topNode){
+        ans.push_back(i.second);
+    }
+
+    return ans;
+}
+
+int main(){
+    
+    return 0;
+}
